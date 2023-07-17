@@ -86,9 +86,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
      */
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath)
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as! HeaderCollectionReusableView
         
         headerView.backgroundColor = UIColor.white
+        headerView.titleLabel.text = "Section\(indexPath.section)"
         
         return headerView
     }
