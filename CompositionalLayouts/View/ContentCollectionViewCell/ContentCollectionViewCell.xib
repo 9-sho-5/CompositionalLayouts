@@ -23,8 +23,8 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="vs6-Se-pqc" secondAttribute="bottom" id="2ex-wL-pk1"/>
                 <constraint firstItem="vs6-Se-pqc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UKV-hU-ZLD"/>
-                <constraint firstAttribute="bottom" secondItem="vs6-Se-pqc" secondAttribute="bottom" id="ckb-cf-Kgj"/>
                 <constraint firstAttribute="trailing" secondItem="vs6-Se-pqc" secondAttribute="trailing" id="jJ0-Jo-bQa"/>
                 <constraint firstItem="vs6-Se-pqc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vio-0r-Tfq"/>
             </constraints>

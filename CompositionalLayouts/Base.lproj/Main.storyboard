@@ -70,16 +70,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hye-kz-ABl">
-                                            <rect key="frame" x="309" y="8" width="77" height="35"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="See All"/>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
-                                        <outlet property="seeAllButton" destination="Hye-kz-ABl" id="MSm-FL-HPg"/>
                                         <outlet property="titleLabel" destination="05S-l7-RjF" id="7ez-eJ-5Mo"/>
                                     </connections>
                                 </collectionReusableView>
@@ -101,11 +94,45 @@
                     <connections>
                         <outlet property="contentCollectionView" destination="ByZ-Fj-HPj" id="FGt-SF-lls"/>
                         <outlet property="headerCollectionView" destination="bLg-b3-fQ3" id="61L-RD-RQ4"/>
+                        <segue destination="NjF-L9-k8Q" kind="show" identifier="toDetail" id="hwR-N9-eIv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="947.32824427480909" y="3.5211267605633805"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="pwb-ZX-o8V">
+            <objects>
+                <viewController id="NjF-L9-k8Q" customClass="DetailViewController" customModule="CompositionalLayouts" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bDH-zA-Ahq">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lc5-gB-F6f">
+                                <rect key="frame" x="76" y="183" width="240" height="238"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWe-hn-yg9">
+                                <rect key="frame" x="76" y="481" width="240" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KZ0-dr-BuQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FpP-5q-y7j"/>
+                    <connections>
+                        <outlet property="imageView" destination="Lc5-gB-F6f" id="MK7-3I-gCV"/>
+                        <outlet property="nameLabel" destination="YWe-hn-yg9" id="XXH-vB-nF6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SzC-zW-kbc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901.5267175572519" y="3.5211267605633805"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="G34-vX-dU2">

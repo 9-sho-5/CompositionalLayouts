@@ -14,7 +14,7 @@ class ContentCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        thumbnailImImage.image = UIImage(named: "master-ball")
     }
 
 }

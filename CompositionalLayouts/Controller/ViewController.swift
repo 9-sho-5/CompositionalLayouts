@@ -7,6 +7,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // 2番目のcollectionView
     @IBOutlet weak var contentCollectionView: UICollectionView!
     
+    var sendPokemonData: Pokemon!
+    
     // 表示するデータ
     let dataArray = ["A","B","C","D","E","F","G","H","I","J"]
     
@@ -24,7 +26,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // それぞれのカスタムセルを登録
         headerCollectionView.register(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "headerCell")
         contentCollectionView.register(UINib(nibName: "ContentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "contentCell")
-
         
         // collectionViewの表示設定
         let headerLayout = UICollectionViewFlowLayout()
@@ -43,41 +44,56 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // 余白設定
         contentLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         // セルの大きさを設定
-        contentLayout.itemSize = CGSize(width: headerCollectionView.frame.height * 0.4, height: headerCollectionView.frame.height * 0.4)
+        contentLayout.itemSize = CGSize(width: headerCollectionView.frame.height * 0.8, height: headerCollectionView.frame.height * 0.8)
         // セクション毎のヘッダーサイズ.
         contentLayout.headerReferenceSize = CGSize(width:100,height:50)
         contentCollectionView.collectionViewLayout = contentLayout
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // collectionViewが1番目のcollectionView(headerCollectionView)のとき
-        if collectionView == headerCollectionView {
-            return 1
-            // それ以外のcollectionViewのとき
-        } else {
-            return 3
-        }
-    }
-    
-    // collectionViewに表示させる数の指定
+    /*
+     collectionViewに表示させる数の指定
+     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // collectionViewが1番目のcollectionView(headerCollectionView)のとき
         if collectionView == headerCollectionView {
             return dataArray.count
             // それ以外のcollectionViewのとき
         } else {
-            return dataArray.count
+            return PokemonDB.count / 5
         }
     }
     
-    //セクションの個数を返すメソッド
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    /*
+     セクションの個数を返すメソッド
+     */
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // collectionViewが1番目のcollectionView(headerCollectionView)のとき
         if collectionView == headerCollectionView {
             return 1
             // それ以外のcollectionViewのとき
         } else {
-            return 3
+            return 5
+        }
+    }
+    
+    /*
+     セルがタップされた時の設定
+     */
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView != headerCollectionView {
+            sendPokemonData = Pokemon(id: PokemonDB[indexPath.section * 9 + indexPath.row].id, name: PokemonDB[indexPath.section * 9 + indexPath.row].name,imageUrl: PokemonDB[indexPath.section * 9 + indexPath.row].imageUrl)
+            performSegue(withIdentifier: "toDetail", sender: self )
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // ②Segueの識別子確認
+        if segue.identifier == "toDetail" {
+            // ③遷移先ViewCntrollerの取得
+            let detailVC = segue.destination as! DetailViewController
+            // ④値の設定
+            detailVC.name = sendPokemonData.name
+            detailVC.imageUrl = sendPokemonData.imageUrl
         }
     }
     
@@ -89,12 +105,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as! HeaderCollectionReusableView
         
         headerView.backgroundColor = UIColor.white
-        headerView.titleLabel.text = "Section\(indexPath.section)"
+        headerView.titleLabel.text = "No. \(indexPath.section * 9 + 1) ~ \(indexPath.section * 9 + 9)"
         
         return headerView
     }
     
-    // セルに表示させる情報の設定
+    /*
+     セルに表示させる情報の設定
+     */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // collectionViewが1番目のcollectionView(headerCollectionView)なら
         if collectionView == headerCollectionView {
@@ -108,8 +126,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // それ以外のcollectionView
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as! ContentCollectionViewCell
-            // 画像の設定
-            cell.thumbnailImImage.image = UIImage(named: "img\(indexPath.row)")
+            
+            switch(indexPath.row + indexPath.section * 9){
+            case 0..<45:
+                // 画像の設定
+                cell.thumbnailImImage.loadImage(urlString: PokemonDB[indexPath.row + indexPath.section * 9].imageUrl)
+            default:
+                print("section error")
+            }
+
             // 背景色
             cell.backgroundColor = .white
             // 角丸
@@ -118,6 +143,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return cell
         }
     }
-    
 }
 
+extension UIImageView {
+    //画像を非同期で読み込む
+    func loadImage(urlString: String){
+        let req = URLRequest(url: NSURL(string:urlString)! as URL,
+                             cachePolicy: .returnCacheDataElseLoad,
+                             timeoutInterval: 5 * 60);
+        let conf =  URLSessionConfiguration.default;
+        let session = URLSession(configuration: conf, delegate: nil, delegateQueue: OperationQueue.main);
+        
+        session.dataTask(with: req, completionHandler:
+                            { (data, resp, err) in
+            if((err) == nil){ //Success
+                let image = UIImage(data:data!)
+                self.image = image;
+                
+            }else{ //Error
+                print("AsyncImageView:Error \(err?.localizedDescription)");
+            }
+        }).resume();
+    }
+}

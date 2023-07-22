@@ -18,6 +18,9 @@
 		4F4014F12A59E19A0095F1C8 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4014EF2A59E19A0095F1C8 /* ContentCollectionViewCell.swift */; };
 		4F4014F22A59E19A0095F1C8 /* ContentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4014F02A59E19A0095F1C8 /* ContentCollectionViewCell.xib */; };
 		4FC1263C2A65950B00C15308 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1263B2A65950B00C15308 /* HeaderCollectionReusableView.swift */; };
+		4FC126432A65A5CD00C15308 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC126422A65A5CD00C15308 /* DetailViewController.swift */; };
+		4FC126482A65B74200C15308 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC126472A65B74200C15308 /* AppError.swift */; };
+		4FC1264A2A6C5CC000C15308 /* PokemonDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC126492A6C5CC000C15308 /* PokemonDB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		4F4014EF2A59E19A0095F1C8 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F4014F02A59E19A0095F1C8 /* ContentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCollectionViewCell.xib; sourceTree = "<group>"; };
 		4FC1263B2A65950B00C15308 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		4FC126422A65A5CD00C15308 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4FC126472A65B74200C15308 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		4FC126492A6C5CC000C15308 /* PokemonDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +74,12 @@
 			children = (
 				4F4014D32A59C5730095F1C8 /* AppDelegate.swift */,
 				4F4014D52A59C5730095F1C8 /* SceneDelegate.swift */,
+				4FC126472A65B74200C15308 /* AppError.swift */,
 				4F4014DE2A59C57B0095F1C8 /* LaunchScreen.storyboard */,
 				4F4014D92A59C5730095F1C8 /* Main.storyboard */,
 				4F4014E12A59C57B0095F1C8 /* Info.plist */,
 				4FC126412A659D3100C15308 /* resources */,
+				4FC126442A65A68A00C15308 /* Model */,
 				4FC1263D2A659C4100C15308 /* View */,
 				4FC126402A659D0700C15308 /* Controller */,
 			);
@@ -110,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				4F4014D72A59C5730095F1C8 /* ViewController.swift */,
+				4FC126422A65A5CD00C15308 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -120,6 +129,14 @@
 				4F4014DC2A59C57B0095F1C8 /* Assets.xcassets */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		4FC126442A65A68A00C15308 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4FC126492A6C5CC000C15308 /* PokemonDB.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,11 +213,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC1263C2A65950B00C15308 /* HeaderCollectionReusableView.swift in Sources */,
+				4FC126482A65B74200C15308 /* AppError.swift in Sources */,
+				4FC1264A2A6C5CC000C15308 /* PokemonDB.swift in Sources */,
 				4F4014D82A59C5730095F1C8 /* ViewController.swift in Sources */,
 				4F4014D42A59C5730095F1C8 /* AppDelegate.swift in Sources */,
 				4F4014F12A59E19A0095F1C8 /* ContentCollectionViewCell.swift in Sources */,
 				4F4014ED2A59C8D60095F1C8 /* HeaderCollectionViewCell.swift in Sources */,
 				4F4014D62A59C5730095F1C8 /* SceneDelegate.swift in Sources */,
+				4FC126432A65A5CD00C15308 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
